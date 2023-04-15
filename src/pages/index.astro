@@ -3,26 +3,30 @@ import Layout from "../layouts/Layout.astro";
 import "../../style/base.scss";
 import { getData } from "../libs/micro";
 
-const responce = await getData({ fields: ["id", "title"] });
+const responce = await getData({
+  fields: ["title", "content", "url", "image"],
+});
 ---
 
 <Layout title="Tkeshi Aoki's Portfolio">
   <main>
-    <h1>Takeshi Aoki's Portfolio site!</h1>
+    <h1>Takeshi Aoki's Portfolio</h1>
 
-    <a
-      href="https://github.com/Takeshi-619"
-      target="_blank"
-      rel="noopener noreferrer">my GitHub Account</a
+    <a href="https://github.com/Takeshi-619" target="_blank"
+      >my GitHub Account</a
     >
+
+    <h2>作品紹介</h2>
 
     <ul>
       {
         responce.contents.map((content: any) => (
           <li>
-            <a href={content.id} target="_blank" rel="noopener noreferrer">
+            <img src={`/${content.image}`} alt="" />
+            <a href={content.url} target="_blank">
               {content.title}
             </a>
+            <p>{content.content}</p>
           </li>
         ))
       }
