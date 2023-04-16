@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import "../../style/base.scss";
 import { getData } from "../libs/micro";
+import Proflie from "../components/Proflie.astro";
 
 const responce = await getData({
   fields: ["title", "content", "url", "image"],
@@ -10,19 +11,15 @@ const responce = await getData({
 
 <Layout title="Tkeshi Aoki's Portfolio">
   <main>
-    <h1>Takeshi Aoki's Portfolio</h1>
+    <h1>Take's Portfolio</h1>
 
-    <a href="https://github.com/Takeshi-619" target="_blank"
-      >my GitHub Account</a
-    >
-
-    <h2>作品紹介</h2>
+    <Proflie />
 
     <ul>
       {
         responce.contents.map((content: any) => (
           <li>
-            <img src={`/${content.image}`} alt="" />
+            <img src={content.image.url} alt="私が制作してきたこれまでの作品" />
             <a href={content.url} target="_blank">
               {content.title}
             </a>
